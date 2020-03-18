@@ -141,11 +141,12 @@ namespace Microsoft.Azure.Commands.ApiManagement
         {
             string skuType = Mappers.MapSku(sku);
 
-            var skuProperties = new ApiManagementServiceSkuProperties(skuType);
-            if (capacity != null)
+            if(capacity == null)
             {
-                skuProperties.Capacity = capacity;
+                capacity = (sku == PsApiManagementSku.Consumption ? 0 : 1);
             }
+
+            var skuProperties = new ApiManagementServiceSkuProperties(skuType, capacity.Value);
 
             var parameters = new ApiManagementServiceResource
             {

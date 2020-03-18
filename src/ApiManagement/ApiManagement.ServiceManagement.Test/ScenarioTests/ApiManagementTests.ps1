@@ -1324,8 +1324,8 @@ function SubscriptionNewModel-CrudTest {
         Assert-NotNull $subs[$i].Scope
         Assert-NotNull $subs[$i].State
         Assert-NotNull $subs[$i].CreatedDate
-        Assert-NotNull $subs[$i].PrimaryKey
-        Assert-NotNull $subs[$i].SecondaryKey
+        Assert-Null $subs[$i].PrimaryKey
+        Assert-Null $subs[$i].SecondaryKey
 
         # get by id
         $sub = Get-AzApiManagementSubscription -Context $context -SubscriptionId $subs[$i].SubscriptionId
@@ -1334,8 +1334,8 @@ function SubscriptionNewModel-CrudTest {
         Assert-NotNull $subs[$i].Scope
         Assert-AreEqual $subs[$i].State $sub.State
         Assert-AreEqual $subs[$i].CreatedDate $sub.CreatedDate
-        Assert-AreEqual $subs[$i].PrimaryKey $sub.PrimaryKey
-        Assert-AreEqual $subs[$i].SecondaryKey $sub.SecondaryKey
+        Assert-Null $subs[$i].PrimaryKey
+        Assert-Null $subs[$i].SecondaryKey
     }
 
     # add new subscription
@@ -1359,6 +1359,11 @@ function SubscriptionNewModel-CrudTest {
         Assert-Null $sub.UserId
         Assert-Null $sub.OwnerId
 
+        # get keys
+        $subKeys = Get-AzApiManagementSubscriptionKeys -Context $context -SubscriptionId $newSubscriptionId
+        Assert-AreEqual $newSubscriptionPk $subKeys.PrimaryKey
+        Assert-AreEqual $newSubscriptionSk $subKeys.SecondaryKey
+
         # update global apis subscription to only Admin Scope
         $patchedName = getAssetName
         $patchedPk = getAssetName
@@ -1370,21 +1375,26 @@ function SubscriptionNewModel-CrudTest {
 
         Assert-AreEqual $newSubscriptionId $sub.SubscriptionId
         Assert-AreEqual $patchedName $sub.Name
-        Assert-AreEqual $patchedPk $sub.PrimaryKey
-        Assert-AreEqual $patchedSk $sub.SecondaryKey
+        Assert-Null $sub.PrimaryKey
+        Assert-Null $sub.SecondaryKey
         Assert-AreEqual $newSubscriptionState $sub.State
         Assert-AreEqual $patchedExpirationDate $sub.ExpirationDate
         Assert-NotNull $sub.UserId
         Assert-AreEqual 1 $sub.UserId
         Assert-NotNull $sub.OwnerId
 
+        # get keys
+        $subKeys = Get-AzApiManagementSubscriptionKeys -Context $context -SubscriptionId $newSubscriptionId
+        Assert-AreEqual $patchedPk $subKeys.PrimaryKey
+        Assert-AreEqual $patchedSk $subKeys.SecondaryKey
+
         # get subscription by apiId
         $sub = Get-AzApiManagementSubscription -Context $context -Scope $allApisScope
 
         Assert-AreEqual $newSubscriptionId $sub.SubscriptionId
         Assert-AreEqual $patchedName $sub.Name
-        Assert-AreEqual $patchedPk $sub.PrimaryKey
-        Assert-AreEqual $patchedSk $sub.SecondaryKey
+        Assert-Null $sub.PrimaryKey
+        Assert-Null $sub.SecondaryKey
         Assert-AreEqual $newSubscriptionState $sub.State
         Assert-AreEqual $patchedExpirationDate $sub.ExpirationDate
         Assert-NotNull $sub.UserId
@@ -2028,9 +2038,9 @@ function Cache-CrudTest {
         Assert-Null $cache
 
         # remove all properties
-        $properties = Get-AzApiManagementProperty -Context $context
+        $properties = Get-AzApiManagementNamedValue -Context $context
         for ($i = 0; $i -lt $properties.Count; $i++) {
-            Remove-AzApiManagementProperty -Context $context -PropertyId $properties[$i].PropertyId
+            Remove-AzApiManagementNamedValue -Context $context -NamedValueId $properties[$i].NamedValueId
         }
     }
 }
@@ -2310,10 +2320,10 @@ function Logger-CrudTest {
         Assert-Null $logger
 
         # remove all properties
-        $properties = Get-AzApiManagementProperty -Context $context
+        $properties = Get-AzApiManagementNamedValue -Context $context
         for ($i = 0; $i -lt $properties.Count; $i++) {
 
-            Remove-AzApiManagementProperty -Context $context -PropertyId $properties[$i].PropertyId
+            Remove-AzApiManagementNamedValue -Context $context -NamedValueId $properties[$i].NamedValueId
         }
     }
 }
@@ -2440,29 +2450,29 @@ function Properties-CrudTest {
     $context = New-AzApiManagementContext -ResourceGroupName $resourceGroupName -ServiceName $serviceName
 
     # create non-Secret Property
-    $propertyId = getAssetName
-    $secretPropertyId = $null
+    $namedValueId = getAssetName
+    $secretNamedValueId = $null
     try {
         $propertyName = getAssetName
         $propertyValue = getAssetName
         $tags = 'sdk', 'powershell'
-        $property = New-AzApiManagementProperty -Context $context -PropertyId $propertyId -Name $propertyName -Value $propertyValue -Tag $tags
+        $property = New-AzApiManagementNamedValue -Context $context -NamedValueId $namedValueId -Name $propertyName -Value $propertyValue -Tag $tags
 
         Assert-NotNull $property
-        Assert-AreEqual $propertyId $property.PropertyId
+        Assert-AreEqual $namedValueId $property.NamedValueId
         Assert-AreEqual $propertyName $property.Name
         Assert-AreEqual $propertyValue $property.Value
         Assert-AreEqual $false  $property.Secret
         Assert-AreEqual 2 $property.Tags.Count
 
         #create Secret Property
-        $secretPropertyId = getAssetName
+        $secretNamedValueId = getAssetName
         $secretPropertyName = getAssetName
         $secretPropertyValue = getAssetName
-        $secretProperty = New-AzApiManagementProperty -Context $context -PropertyId $secretPropertyId -Name $secretPropertyName -Value $secretPropertyValue -Secret
+        $secretProperty = New-AzApiManagementNamedValue -Context $context -NamedValueId $secretNamedValueId -Name $secretPropertyName -Value $secretPropertyValue -Secret
 
         Assert-NotNull $secretProperty
-        Assert-AreEqual $secretPropertyId $secretProperty.PropertyId
+        Assert-AreEqual $secretNamedValueId $secretProperty.NamedValueId
         Assert-AreEqual $secretPropertyName $secretProperty.Name
         Assert-AreEqual $secretPropertyValue $secretProperty.Value
         Assert-AreEqual $true  $secretProperty.Secret
@@ -2470,7 +2480,7 @@ function Properties-CrudTest {
         Assert-AreEqual 0 $secretProperty.Tags.Count
 
         # get all properties
-        $properties = Get-AzApiManagementProperty -Context $context
+        $properties = Get-AzApiManagementNamedValue -Context $context
 
         Assert-NotNull $properties
         # there should be 2 properties
@@ -2478,7 +2488,7 @@ function Properties-CrudTest {
 
         # get properties by name
         $properties = $null
-        $properties = Get-AzApiManagementProperty -Context $context -Name 'ps'
+        $properties = Get-AzApiManagementNamedValue -Context $context -Name 'ps'
 		
         Assert-NotNull $properties
         # both the properties created start with 'ps'
@@ -2486,17 +2496,17 @@ function Properties-CrudTest {
 
         # get properties by tag
         $properties = $null
-        $properties = Get-AzApiManagementProperty -Context $context -Tag 'sdk'
+        $properties = Get-AzApiManagementNamedValue -Context $context -Tag 'sdk'
 
         Assert-NotNull $property
         Assert-AreEqual 1 $properties.Count
 
         # get property by Id
         $secretProperty = $null
-        $secretProperty = Get-AzApiManagementProperty -Context $context -PropertyId $secretPropertyId
+        $secretProperty = Get-AzApiManagementNamedValue -Context $context -NamedValueId $secretNamedValueId
 
         Assert-NotNull $secretProperty
-        Assert-AreEqual $secretPropertyId $secretProperty.PropertyId
+        Assert-AreEqual $secretNamedValueId $secretProperty.NamedValueId
         Assert-AreEqual $secretPropertyName $secretProperty.Name
         Assert-AreEqual $secretPropertyValue $secretProperty.Value
         Assert-AreEqual $true  $secretProperty.Secret
@@ -2505,10 +2515,10 @@ function Properties-CrudTest {
 
         # update the secret property with a tag
         $secretProperty = $null
-        $secretProperty = Set-AzApiManagementProperty -Context $context -PropertyId $secretPropertyId -Tag $tags -PassThru
+        $secretProperty = Set-AzApiManagementNamedValue -Context $context -NamedValueId $secretNamedValueId -Tag $tags -PassThru
 
         Assert-NotNull $secretProperty
-        Assert-AreEqual $secretPropertyId $secretProperty.PropertyId
+        Assert-AreEqual $secretNamedValueId $secretProperty.NamedValueId
         Assert-AreEqual $secretPropertyName $secretProperty.Name
         Assert-AreEqual $secretPropertyValue $secretProperty.Value
         Assert-AreEqual $true  $secretProperty.Secret
@@ -2517,10 +2527,10 @@ function Properties-CrudTest {
 
         #convert a non secret property to secret
         $property = $null
-        $property = Set-AzApiManagementProperty -Context $context -PropertyId $propertyId -Secret $true -PassThru
+        $property = Set-AzApiManagementNamedValue -Context $context -NamedValueId $namedValueId -Secret $true -PassThru
 
         Assert-NotNull $property
-        Assert-AreEqual $propertyId $property.PropertyId
+        Assert-AreEqual $namedValueId $property.NamedValueId
         Assert-AreEqual $propertyName $property.Name
         Assert-AreEqual $propertyValue $property.Value
         Assert-AreEqual $true  $property.Secret
@@ -2528,13 +2538,13 @@ function Properties-CrudTest {
         Assert-AreEqual 2 $property.Tags.Count
 
         #remove secret property
-        $removed = Remove-AzApiManagementProperty -Context $context -PropertyId $secretPropertyId -PassThru
+        $removed = Remove-AzApiManagementNamedValue -Context $context -NamedValueId $secretNamedValueId -PassThru
         Assert-True { $removed }
 
         $secretProperty = $null
         try {
             # check it was removed
-            $secretProperty = Get-AzApiManagementProperty -Context $context -PropertyId $secretPropertyId
+            $secretProperty = Get-AzApiManagementNamedValue -Context $context -NamedValueId $secretNamedValueId
         }
         catch {
         }
@@ -2542,13 +2552,13 @@ function Properties-CrudTest {
         Assert-Null $secretProperty
     }
     finally {
-        $removed = Remove-AzApiManagementProperty -Context $context -PropertyId $propertyId -PassThru
+        $removed = Remove-AzApiManagementNamedValue -Context $context -NamedValueId $namedValueId -PassThru
         Assert-True { $removed }
 
         $property = $null
         try {
             # check it was removed
-            $property = Get-AzApiManagementProperty -Context $context -PropertyId $propertyId
+            $property = Get-AzApiManagementNamedValue -Context $context -NamedValueId $namedValueId
         }
         catch {
         }
@@ -2557,7 +2567,7 @@ function Properties-CrudTest {
 
         # cleanup other Property
         try {
-            Remove-AzApiManagementProperty -Context $context -PropertyId $secretPropertyId -PassThru
+            Remove-AzApiManagementNamedValue -Context $context -NamedValueId $secretNamedValueId -PassThru
         }
         catch {
         }
@@ -3412,10 +3422,10 @@ function Diagnostic-CrudTest {
         Assert-True { $removed }
 
         # remove all properties
-        $properties = Get-AzApiManagementProperty -Context $context
+        $properties = Get-AzApiManagementNamedValue -Context $context
         for ($i = 0; $i -lt $properties.Count; $i++) {
 
-            Remove-AzApiManagementProperty -Context $context -PropertyId $properties[$i].PropertyId
+            Remove-AzApiManagementNamedValue -Context $context -NamedValueId $properties[$i].NamedValueId
         }
     }
 }
@@ -3551,10 +3561,10 @@ function ApiDiagnostic-CrudTest {
         Assert-True { $removed }
 
         # remove all properties
-        $properties = Get-AzApiManagementProperty -Context $context
+        $properties = Get-AzApiManagementNamedValue -Context $context
         for ($i = 0; $i -lt $properties.Count; $i++) {
 
-            Remove-AzApiManagementProperty -Context $context -PropertyId $properties[$i].PropertyId
+            Remove-AzApiManagementNamedValue -Context $context -NamedValueId $properties[$i].NamedValueId
         }
     }
 }
