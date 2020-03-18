@@ -1324,8 +1324,8 @@ function SubscriptionNewModel-CrudTest {
         Assert-NotNull $subs[$i].Scope
         Assert-NotNull $subs[$i].State
         Assert-NotNull $subs[$i].CreatedDate
-        Assert-NotNull $subs[$i].PrimaryKey
-        Assert-NotNull $subs[$i].SecondaryKey
+        Assert-Null $subs[$i].PrimaryKey
+        Assert-Null $subs[$i].SecondaryKey
 
         # get by id
         $sub = Get-AzApiManagementSubscription -Context $context -SubscriptionId $subs[$i].SubscriptionId
@@ -1334,8 +1334,8 @@ function SubscriptionNewModel-CrudTest {
         Assert-NotNull $subs[$i].Scope
         Assert-AreEqual $subs[$i].State $sub.State
         Assert-AreEqual $subs[$i].CreatedDate $sub.CreatedDate
-        Assert-AreEqual $subs[$i].PrimaryKey $sub.PrimaryKey
-        Assert-AreEqual $subs[$i].SecondaryKey $sub.SecondaryKey
+        Assert-Null $subs[$i].PrimaryKey
+        Assert-Null $subs[$i].SecondaryKey
     }
 
     # add new subscription
@@ -1359,6 +1359,11 @@ function SubscriptionNewModel-CrudTest {
         Assert-Null $sub.UserId
         Assert-Null $sub.OwnerId
 
+        # get keys
+        $subKeys = Get-AzApiManagementSubscriptionKeys -Context $context -SubscriptionId $newSubscriptionId
+        Assert-AreEqual $newSubscriptionPk $subKeys.PrimaryKey
+        Assert-AreEqual $newSubscriptionSk $subKeys.SecondaryKey
+
         # update global apis subscription to only Admin Scope
         $patchedName = getAssetName
         $patchedPk = getAssetName
@@ -1370,21 +1375,26 @@ function SubscriptionNewModel-CrudTest {
 
         Assert-AreEqual $newSubscriptionId $sub.SubscriptionId
         Assert-AreEqual $patchedName $sub.Name
-        Assert-AreEqual $patchedPk $sub.PrimaryKey
-        Assert-AreEqual $patchedSk $sub.SecondaryKey
+        Assert-Null $sub.PrimaryKey
+        Assert-Null $sub.SecondaryKey
         Assert-AreEqual $newSubscriptionState $sub.State
         Assert-AreEqual $patchedExpirationDate $sub.ExpirationDate
         Assert-NotNull $sub.UserId
         Assert-AreEqual 1 $sub.UserId
         Assert-NotNull $sub.OwnerId
 
+        # get keys
+        $subKeys = Get-AzApiManagementSubscriptionKeys -Context $context -SubscriptionId $newSubscriptionId
+        Assert-AreEqual $patchedPk $subKeys.PrimaryKey
+        Assert-AreEqual $patchedSk $subKeys.SecondaryKey
+
         # get subscription by apiId
         $sub = Get-AzApiManagementSubscription -Context $context -Scope $allApisScope
 
         Assert-AreEqual $newSubscriptionId $sub.SubscriptionId
         Assert-AreEqual $patchedName $sub.Name
-        Assert-AreEqual $patchedPk $sub.PrimaryKey
-        Assert-AreEqual $patchedSk $sub.SecondaryKey
+        Assert-Null $sub.PrimaryKey
+        Assert-Null $sub.SecondaryKey
         Assert-AreEqual $newSubscriptionState $sub.State
         Assert-AreEqual $patchedExpirationDate $sub.ExpirationDate
         Assert-NotNull $sub.UserId

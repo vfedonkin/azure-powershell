@@ -99,6 +99,7 @@
     "Get-AzApiManagementProduct": "Get-AzureRmApiManagementProduct",
     "Get-AzApiManagementProperty": "Get-AzureRmApiManagementProperty",
     "Get-AzApiManagementSubscription": "Get-AzureRmApiManagementSubscription",
+    "Get-AzApiManagementSubscriptionKeys": "Get-AzureRmApiManagementSubscriptionKeys",
     "Get-AzApiManagementTenantSyncState": "Get-AzureRmApiManagementTenantSyncState",
     "Get-AzApiManagementUser": "Get-AzureRmApiManagementUser",
     "Get-AzApiManagementUserSsoUrl": "Get-AzureRmApiManagementUserSsoUrl",

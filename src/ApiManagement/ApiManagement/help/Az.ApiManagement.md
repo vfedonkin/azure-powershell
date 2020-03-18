@@ -95,6 +95,9 @@ Gets a link with an SSO token to a deployed management portal of an API Manageme
 ### [Get-AzApiManagementSubscription](Get-AzApiManagementSubscription.md)
 Gets subscriptions.
 
+### [Get-AzApiManagementSubscriptionKeys](Get-AzApiManagementSubscriptionKeys.md)
+Gets subscription keys.
+
 ### [Get-AzApiManagementTenantAccess](Get-AzApiManagementTenantAccess.md)
 Gets the access configuration for a tenant.
 
