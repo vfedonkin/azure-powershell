@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-AzApiManagementIdentityProviderClientSecret
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get the identity provider client secret.
 
 ## SYNTAX
 
@@ -18,16 +18,17 @@ Get-AzApiManagementIdentityProviderClientSecret -Context <PsApiManagementContext
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get the identity provider client secret.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### Example 2: Get the client secret of AAD Type Identity Provider
+```
+PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\> Get-AzApiManagementIdentityProviderClientSecret -Context $apimContext -Type Aad
 ```
 
-{{ Add example description here }}
+Gets the client secret of the Identity Provider Configuration of Azure Active Directory.
 
 ## PARAMETERS
 

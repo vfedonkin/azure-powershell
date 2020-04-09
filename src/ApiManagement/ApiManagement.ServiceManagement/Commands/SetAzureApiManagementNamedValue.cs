@@ -76,7 +76,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
         public override void ExecuteApiManagementCmdlet()
         {
-            if (ShouldProcess(NamedValueId, Resources.SetProperty))
+            if (ShouldProcess(NamedValueId, Resources.SetNamedValue))
             {
                 Client.NamedValueSet(
                     Context,

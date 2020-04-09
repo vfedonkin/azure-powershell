@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-AzApiManagementAuthorizationServerClientSecret
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets an API Management authorization server client secret.
 
 ## SYNTAX
 
@@ -25,16 +25,17 @@ Get-AzApiManagementAuthorizationServerClientSecret [-ServerId <String>] -Resourc
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+The **Get-AzApiManagementAuthorizationServerClientSecret** cmdlet gets the client secret of the Azure API Management authorization server.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### Example 1: Get a specified authorization server client secret by id
+```
+PS C:\>$ApiMgmtContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\>Get-AzApiManagementAuthorizationServerClientSecret -Context $ApiMgmtContext -ServerId "0123456789"
 ```
 
-{{ Add example description here }}
+This command gets the specified authorization server cient secret.
 
 ## PARAMETERS
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-AzApiManagementOpenIdConnectProviderClientSecret
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets OpenID Connect provider client secret.
 
 ## SYNTAX
 
@@ -18,16 +18,18 @@ Get-AzApiManagementOpenIdConnectProviderClientSecret -Context <PsApiManagementCo
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Gets OpenID Connect provider client secret.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### Example 1: Get a provider client secret by using an ID
+```
+PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\>Get-AzApiManagementOpenIdConnectProviderClientSecret -Context $apimContext -OpenIdConnectProviderId "OICProvider01"
 ```
 
-{{ Add example description here }}
+This command gets a client secret of the provider that has the ID OICProvider01.
+
 
 ## PARAMETERS
 

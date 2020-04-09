@@ -47,9 +47,8 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
         public override void ExecuteApiManagementCmdlet()
         {
-            //vifedotodo
-            var actionDescription = string.Format(CultureInfo.CurrentCulture, Resources.PropertyRemoveDescription, NamedValueId);
-            var actionWarning = string.Format(CultureInfo.CurrentCulture, Resources.PropertyRemoveWarning, NamedValueId);
+            var actionDescription = string.Format(CultureInfo.CurrentCulture, Resources.NamedValueRemoveDescription, NamedValueId);
+            var actionWarning = string.Format(CultureInfo.CurrentCulture, Resources.NamedValueRemoveWarning, NamedValueId);
 
             // Do nothing if force is not specified and user cancelled the operation
             if (!ShouldProcess(

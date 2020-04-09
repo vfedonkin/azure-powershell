@@ -31,7 +31,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
         public override void ExecuteApiManagementCmdlet()
         {
-            WriteObject(Client.GetTenantAccessInformation(Context));
+            WriteObject(Client.GetTenantAccessInformationSecrets(Context));
         }
     }
 }

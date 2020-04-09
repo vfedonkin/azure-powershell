@@ -43,17 +43,15 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
         public override void ExecuteApiManagementCmdlet()
         {
-            /*vifedotodo
-            if (ParameterSetName.Equals(GetById))
+            if (!string.IsNullOrEmpty(OpenIdConnectProviderId))
             {
-                var openIdConnectProvider = Client.OpenIdConnectProviderById(Context, OpenIdConnectProviderId);
+                var openIdConnectProvider = Client.OpenIdConnectProviderClientSecretById(Context, OpenIdConnectProviderId);
                 WriteObject(openIdConnectProvider);
             }
             else
             {
-                throw new InvalidOperationException(string.Format("Parameter set name '{0}' is not supported.", ParameterSetName));
+                throw new InvalidOperationException("OpenIdConnectProvider Id not provided");
             }
-            */
         }
     }
 }

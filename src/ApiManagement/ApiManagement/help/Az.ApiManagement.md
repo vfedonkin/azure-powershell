@@ -51,7 +51,7 @@ Get the details of the API Version Sets
 Gets an API Management authorization server.
 
 ### [Get-AzApiManagementAuthorizationServerClientSecret](Get-AzApiManagementAuthorizationServerClientSecret.md)
-{{ Fill in the Synopsis }}
+Gets an API Management authorization server client secret.
 
 ### [Get-AzApiManagementBackend](Get-AzApiManagementBackend.md)
 Get the details of the Backend.
@@ -72,16 +72,16 @@ Gets all or specific API management groups.
 Get the identity provider configuration details.
 
 ### [Get-AzApiManagementIdentityProviderClientSecret](Get-AzApiManagementIdentityProviderClientSecret.md)
-{{ Fill in the Synopsis }}
+Get the identity provider client secret.
 
 ### [Get-AzApiManagementLogger](Get-AzApiManagementLogger.md)
 Gets API Management Logger objects.
 
 ### [Get-AzApiManagementNamedValue](Get-AzApiManagementNamedValue.md)
-{{ Fill in the Synopsis }}
+Gets API Management Named Value objects.
 
 ### [Get-AzApiManagementNamedValueSecretValue](Get-AzApiManagementNamedValueSecretValue.md)
-{{ Fill in the Synopsis }}
+Gets secret value of the API Management Named Value.
 
 ### [Get-AzApiManagementNetworkStatus](Get-AzApiManagementNetworkStatus.md)
 Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
@@ -90,7 +90,7 @@ Gets the Connectivity Status to the external resources on which the Api Manageme
 Gets OpenID Connect providers.
 
 ### [Get-AzApiManagementOpenIdConnectProviderClientSecret](Get-AzApiManagementOpenIdConnectProviderClientSecret.md)
-{{ Fill in the Synopsis }}
+Gets client secret of the OpenID Connect provider.
 
 ### [Get-AzApiManagementOperation](Get-AzApiManagementOperation.md)
 Gets a list or a specified API Operation.
@@ -114,13 +114,13 @@ Gets subscription keys.
 Gets the access configuration for a tenant.
 
 ### [Get-AzApiManagementTenantAccessSecrets](Get-AzApiManagementTenantAccessSecrets.md)
-{{ Fill in the Synopsis }}
+Gets the access configuration keys for a tenant.
 
 ### [Get-AzApiManagementTenantGitAccess](Get-AzApiManagementTenantGitAccess.md)
 Gets the Git access configuration for a tenant.
 
 ### [Get-AzApiManagementTenantGitAccessSecrets](Get-AzApiManagementTenantGitAccessSecrets.md)
-{{ Fill in the Synopsis }}
+Gets the Git access configuration keys for a tenant.
 
 ### [Get-AzApiManagementTenantSyncState](Get-AzApiManagementTenantSyncState.md)
 Gets the status of the most recent synchronization between the configuration database and the Git repository.
@@ -195,7 +195,7 @@ Creates a new Identity Provider configuration.
 Creates an API Management Logger.
 
 ### [New-AzApiManagementNamedValue](New-AzApiManagementNamedValue.md)
-{{ Fill in the Synopsis }}
+Creates an API Management Named Value.
 
 ### [New-AzApiManagementOpenIdConnectProvider](New-AzApiManagementOpenIdConnectProvider.md)
 Creates an OpenID Connect provider.
@@ -282,7 +282,7 @@ Removes an existing Identity Provider Configuration.
 Removes an API Management Logger.
 
 ### [Remove-AzApiManagementNamedValue](Remove-AzApiManagementNamedValue.md)
-{{ Fill in the Synopsis }}
+Removes an API Management Named Value.
 
 ### [Remove-AzApiManagementOpenIdConnectProvider](Remove-AzApiManagementOpenIdConnectProvider.md)
 Removes an OpenID Connect provider.
@@ -354,7 +354,7 @@ Updates the Configuration of an existing Identity Provider.
 Modifies an API Management Logger.
 
 ### [Set-AzApiManagementNamedValue](Set-AzApiManagementNamedValue.md)
-{{ Fill in the Synopsis }}
+Modifies an API Management Named Value.
 
 ### [Set-AzApiManagementOpenIdConnectProvider](Set-AzApiManagementOpenIdConnectProvider.md)
 Modifies an OpenID Connect provider.

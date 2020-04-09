@@ -93,7 +93,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.Helpers
                 return null;
             }
 
-            return new ApiManagementServiceIdentity();            
+            return new ApiManagementServiceIdentity() { Type = "SystemAssigned" };            
         }
         
         public static ApiManagementServiceResource MapPsApiManagement(PsApiManagement apiManagement)

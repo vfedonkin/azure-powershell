@@ -53,7 +53,6 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
         public override void ExecuteApiManagementCmdlet()
         {
-            /*vifedotodo
             string resourceGroupName;
             string serviceName;
             string authorizationserverId;
@@ -74,15 +73,13 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
             if (string.IsNullOrEmpty(authorizationserverId))
             {
-                var servers = Client.AuthorizationServerList(resourceGroupName, serviceName);
-                WriteObject(servers, true);
+                throw new InvalidOperationException("Authorization Server identifier not provided.");
             }
             else
             {
-                var server = Client.AuthorizationServerById(resourceGroupName, serviceName, authorizationserverId);
+                var server = Client.AuthorizationServerClientSecretById(resourceGroupName, serviceName, authorizationserverId);
                 WriteObject(server);
             } 
-            */
         }
     }
 }

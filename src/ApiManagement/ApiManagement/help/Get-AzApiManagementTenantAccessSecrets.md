@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-AzApiManagementTenantAccessSecrets
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets the access configuration keys for a tenant.
 
 ## SYNTAX
 
@@ -18,16 +18,17 @@ Get-AzApiManagementTenantAccessSecrets -Context <PsApiManagementContext>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Gets the access configuration keys for a tenant.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### Example 1: Get tenant access configuration keys
+```
+PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\>Get-AzApiManagementTenantAccessSecrets -Context $apimContext
 ```
 
-{{ Add example description here }}
+This command gets the tenant access configuration keys for the specified context.
 
 ## PARAMETERS
 

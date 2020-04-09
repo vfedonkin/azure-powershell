@@ -40,7 +40,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
             ParameterSetName = GetById,
             ValueFromPipelineByPropertyName = true,
             Mandatory = false,
-            HelpMessage = "Identifier of the named value. If specified will try to find property by the identifier. This parameter is optional.")]
+            HelpMessage = "Identifier of the named value. If specified will try to find named value by the identifier. This parameter is optional.")]
         public String NamedValueId { get; set; }
 
         [Parameter(

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-AzApiManagementNamedValue
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Removes an API Management Named Value.
 
 ## SYNTAX
 
@@ -18,16 +18,17 @@ Remove-AzApiManagementNamedValue -Context <PsApiManagementContext> -NamedValueId
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+The **Remove-AzApiManagementNamedValue** cmdlet removes an Azure API Management **Named Value**.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### Example 1: Remove the named value
+```
+PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\>Remove-AzApiManagementNamedValue -Context $apimContext -NamedValueId "Property11" -PassThru
 ```
 
-{{ Add example description here }}
+This command removes the named value that has the ID Property11.
 
 ## PARAMETERS
 

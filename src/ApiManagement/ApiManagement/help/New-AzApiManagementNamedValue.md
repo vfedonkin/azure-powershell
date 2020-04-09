@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-AzApiManagementNamedValue
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates new Named Value.
 
 ## SYNTAX
 
@@ -18,16 +18,27 @@ New-AzApiManagementNamedValue -Context <PsApiManagementContext> [-NamedValueId <
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+The **New-AzApiManagementNamedValue** cmdlet creates an Azure API Management **Named Value**.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### Example 1: Create a named value that includes tags
+```
+PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\>$Tags = 'sdk', 'powershell'
+PS C:\> New-AzApiManagementNamedValue -Context $apimContext -NamedValueId "Property11" -Name "Property Name" -Value "Property Value" -Tags $Tags
 ```
 
-{{ Add example description here }}
+The first command assigns two values to the $Tags variable.
+The second command creates a named value and assigns the strings in $Tags as tags on the property.
+
+### Example 2: Create a named value that has a secret value
+```powershell
+PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\>New-AzApiManagementNamedValue -Context $apimContext -NamedValueId "Property12" -Name "Secret Property" -Value "Secret Property Value" -Secret
+```
+
+This command creates a **Named Value** that has a value that is encrypted.
 
 ## PARAMETERS
 

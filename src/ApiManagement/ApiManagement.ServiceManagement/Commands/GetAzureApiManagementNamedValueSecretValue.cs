@@ -19,10 +19,11 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
     using System.Collections.Generic;
     using System.Management.Automation;
 
-    [Cmdlet("Get", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "ApiManagementNamedValueSecretValue", DefaultParameterSetName = GetById)]
+    [Cmdlet("Get", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "ApiManagementNamedValueSecretValue", DefaultParameterSetName = Default)]
     [OutputType(typeof(PsApiManagementNamedValueSecretValue))]
     public class GetAzureApiManagementNamedValueSecretValue : AzureApiManagementCmdletBase
     {
+        private const string Default = "Default";
         private const string GetById = "GetByNamedValueId";
 
         [Parameter(
@@ -42,14 +43,14 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
         public override void ExecuteApiManagementCmdlet()
         {
-            if (ParameterSetName.Equals(GetById))
+            if (!string.IsNullOrEmpty(NamedValueId))
             {
-                var property = Client.NamedValueById(Context, NamedValueId);
+                var property = Client.NamedValueSecretValueById(Context, NamedValueId);
                 WriteObject(property);
             }
             else
             {
-                throw new InvalidOperationException(string.Format("Parameter set name '{0}' is not supported.", ParameterSetName));
+                throw new InvalidOperationException("Named Value Id not provided");
             }
         }
     }

@@ -393,6 +393,10 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
                     .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags == null ? new string[0] : src.Tags.ToArray()));
 
                 cfg
+                    .CreateMap<PropertyValueContract, PsApiManagementNamedValueSecretValue>()
+                    .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Value));
+
+                cfg
                     .CreateMap<OpenidConnectProviderContract, PsApiManagementOpenIdConnectProvider>()
                     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                     .ForMember(dest => dest.OpenIdConnectProviderId, opt => opt.MapFrom(src => src.Name))
@@ -578,6 +582,10 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
                     .ForMember(dest => dest.BackendSetting, opt => opt.MapFrom(src => src.Backend));
 
                 cfg.CreateMap<Hashtable, Hashtable>();
+
+                cfg
+                    .CreateMap<ClientSecretContract, PsApiManagementClientSecret>()
+                    .ForMember(dest => dest.ClientSecret, opt => opt.MapFrom(src => src.ClientSecret));
             });
 
             _mapper = config.CreateMapper();
@@ -2455,6 +2463,16 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
             return server;
         }
 
+        public PsApiManagementClientSecret AuthorizationServerClientSecretById(
+            string resourceGroupName, string serviceName, string serverId)
+        {
+            var response = Client.AuthorizationServer.ListSecrets(resourceGroupName, serviceName, serverId);
+
+            var server = Mapper.Map<PsApiManagementClientSecret>(response);
+            return server;
+        }
+
+
         public PsApiManagementOAuth2AuthorizationServer AuthorizationServerCreate(
             PsApiManagementContext context,
             string serverId,
@@ -2834,6 +2852,14 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
             return property;
         }
 
+        public PsApiManagementNamedValueSecretValue NamedValueSecretValueById(PsApiManagementContext context, string propertyId)
+        {
+            var response = Client.NamedValue.ListValue(context.ResourceGroupName, context.ServiceName, propertyId);
+            var property = Mapper.Map<PsApiManagementNamedValueSecretValue>(response);
+
+            return property;
+        }
+
         public void NamedValueRemove(PsApiManagementContext context, string propertyId)
         {
             Client.NamedValue.Delete(context.ResourceGroupName, context.ServiceName, propertyId, "*");
@@ -2848,6 +2874,11 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
             IList<string> tags = null)
         {
             var existingProperty = Client.NamedValue.Get(context.ResourceGroupName, context.ServiceName, propertyId);
+            if (existingProperty.Secret == true)
+            {
+                var existingPropertySecretValue = Client.NamedValue.ListValue(context.ResourceGroupName, context.ServiceName, propertyId);
+                existingProperty.Value = existingPropertySecretValue.Value;
+            }
 
             var propertyToUpdate = new NamedValueCreateContract(existingProperty.DisplayName, existingProperty.Value, existingProperty.Id,
                 existingProperty.Name, existingProperty.Type, existingProperty.Tags, existingProperty.Secret);
@@ -2952,6 +2983,18 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
             return openIdConnectProvider;
         }
 
+        public PsApiManagementClientSecret OpenIdConnectProviderClientSecretById(PsApiManagementContext context, string openIdConnectProviderId)
+        {
+            var response = Client.OpenIdConnectProvider.ListSecrets(
+                context.ResourceGroupName,
+                context.ServiceName,
+                openIdConnectProviderId);
+
+            var openIdConnectProvider = Mapper.Map<PsApiManagementClientSecret>(response);
+
+            return openIdConnectProvider;
+        }
+
         public void OpenIdConnectProviderRemove(PsApiManagementContext context, string openIdConnectProviderId)
         {
             Client.OpenIdConnectProvider.Delete(context.ResourceGroupName, context.ServiceName, openIdConnectProviderId, "*");
@@ -3011,6 +3054,16 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
 
             return Mapper.Map<PsApiManagementAccessInformation>(response);
         }
+
+        public PsApiManagementAccessInformation GetTenantGitAccessInformationSecrets(PsApiManagementContext context)
+        {
+            var response = Client.TenantAccessGit.ListSecrets(
+                context.ResourceGroupName,
+                context.ServiceName);
+
+            return Mapper.Map<PsApiManagementAccessInformation>(response);
+        }
+
         #endregion
 
         #region TenantConfiguration
@@ -3193,6 +3246,18 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
 
             return identityProvider;
         }
+
+        public PsApiManagementClientSecret IdentityProviderClientSecretByName(string resourceGroupName, string serviceName, string identityProviderName)
+        {
+            var response = Client.IdentityProvider.ListSecrets(
+                resourceGroupName,
+                serviceName,
+                identityProviderName);
+            var identityProvider = Mapper.Map<PsApiManagementClientSecret>(response);
+
+            return identityProvider;
+        }
+
 
         public void IdentityProviderRemove(PsApiManagementContext context, string identityProviderName)
         {

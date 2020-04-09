@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-AzApiManagementNamedValue
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets a list or a particular Named Value.
 
 ## SYNTAX
 
@@ -37,16 +37,18 @@ Get-AzApiManagementNamedValue -Context <PsApiManagementContext> [-Tag <String>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+The **Get-AzApiManagementNamedValue** cmdlet gets a list or a particular named value.
+Value will not be included into result details if the named value marked as a secret. To get secret value, use **Get-AzApiManagementNamedValueSecretValue**.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### Example 1: Get Named Value by name
+```
+PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\>Get-AzApiManagementNamedValue -Context $apimContext -Name "sql-connectionstring"
 ```
 
-{{ Add example description here }}
+This command gets the named value details given the named value name.
 
 ## PARAMETERS
 
@@ -99,7 +101,7 @@ Accept wildcard characters: False
 
 ### -NamedValueId
 Identifier of the named value.
-If specified will try to find property by the identifier.
+If specified will try to find named value by the identifier.
 This parameter is optional.
 
 ```yaml

@@ -41,17 +41,15 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
         
         public override void ExecuteApiManagementCmdlet()
         {
-            /*
             if (ParameterSetName.Equals(IdentityProviderByType))
             {
-                var identityProvider = Client.IdentityProviderByName(Context.ResourceGroupName, Context.ServiceName, Type.ToString("g"));
+                var identityProvider = Client.IdentityProviderClientSecretByName(Context.ResourceGroupName, Context.ServiceName, Type.ToString("g"));
                 WriteObject(identityProvider);
             }
             else
             {
                 throw new InvalidOperationException(string.Format("Parameter set name '{0}' is not supported.", ParameterSetName));
             }
-            */
         }
     }
 }

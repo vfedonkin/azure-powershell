@@ -216,7 +216,7 @@ namespace Microsoft.Azure.Commands.ApiManagement
 
             if (createResourceIdentity)
             {
-                parameters.Identity = new ApiManagementServiceIdentity();
+                parameters.Identity = new ApiManagementServiceIdentity() { Type = "SystemAssigned" };
             }
 
             var apiManagementResource = Client.ApiManagementService.CreateOrUpdate(resourceGroupName, serviceName, parameters);
@@ -291,13 +291,13 @@ namespace Microsoft.Azure.Commands.ApiManagement
 
         public PsApiManagement SetApiManagementService(
             PsApiManagement apiManagement,
-            bool createResourceIdentity)
+            bool createSystemResourceIdentity)
         {
             ApiManagementServiceResource apiManagementParameters = Mappers.MapPsApiManagement(apiManagement);
 
-            if (createResourceIdentity)
+            if (createSystemResourceIdentity)
             {
-                apiManagementParameters.Identity = new ApiManagementServiceIdentity();
+                apiManagementParameters.Identity = new ApiManagementServiceIdentity() { Type = "SystemAssigned" };
             }
 
             var apiManagementService = Client.ApiManagementService.CreateOrUpdate(

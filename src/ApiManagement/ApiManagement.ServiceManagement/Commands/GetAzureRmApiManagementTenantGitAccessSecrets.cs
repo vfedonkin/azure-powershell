@@ -31,8 +31,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
         public override void ExecuteApiManagementCmdlet()
         {
-            //vifedotodo
-            //WriteObject(Client.GetTenantGitAccessInformation(Context));
+            WriteObject(Client.GetTenantGitAccessInformationSecrets(Context));
         }
     }
 }

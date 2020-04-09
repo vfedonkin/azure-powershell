@@ -8,26 +8,35 @@ schema: 2.0.0
 # Get-AzApiManagementNamedValueSecretValue
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets a secret value of the particular Named Value.
 
 ## SYNTAX
 
+### Default (Default)
+```
+Get-AzApiManagementNamedValueSecretValue -Context <PsApiManagementContext>
+ [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+```
+
+### GetByNamedValueId
 ```
 Get-AzApiManagementNamedValueSecretValue -Context <PsApiManagementContext> -NamedValueId <String>
  [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Gets a secret value of the particular Named Value.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### Example 1: Get named value by name
+```
+PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
+PS C:\>Get-AzApiManagementNamedValueSecretValue -Context $apimContext -NamedValueId "sql-connectionstring"
 ```
 
-{{ Add example description here }}
+This command gets the named value details given the named value name.
+
 
 ## PARAMETERS
 
@@ -68,7 +77,7 @@ This parameter is required.
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: GetByNamedValueId
 Aliases:
 
 Required: True
