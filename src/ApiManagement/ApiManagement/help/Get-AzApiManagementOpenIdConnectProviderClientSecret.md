@@ -30,7 +30,6 @@ PS C:\>Get-AzApiManagementOpenIdConnectProviderClientSecret -Context $apimContex
 
 This command gets a client secret of the provider that has the ID OICProvider01.
 
-
 ## PARAMETERS
 
 ### -Context

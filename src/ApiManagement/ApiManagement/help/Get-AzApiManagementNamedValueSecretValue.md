@@ -37,7 +37,6 @@ PS C:\>Get-AzApiManagementNamedValueSecretValue -Context $apimContext -NamedValu
 
 This command gets the named value details given the named value name.
 
-
 ## PARAMETERS
 
 ### -Context

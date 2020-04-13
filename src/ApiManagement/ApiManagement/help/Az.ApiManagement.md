@@ -78,10 +78,10 @@ Get the identity provider client secret.
 Gets API Management Logger objects.
 
 ### [Get-AzApiManagementNamedValue](Get-AzApiManagementNamedValue.md)
-Gets API Management Named Value objects.
+Gets a list or a particular Named Value.
 
 ### [Get-AzApiManagementNamedValueSecretValue](Get-AzApiManagementNamedValueSecretValue.md)
-Gets secret value of the API Management Named Value.
+Gets a secret value of the particular Named Value.
 
 ### [Get-AzApiManagementNetworkStatus](Get-AzApiManagementNetworkStatus.md)
 Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
@@ -90,7 +90,7 @@ Gets the Connectivity Status to the external resources on which the Api Manageme
 Gets OpenID Connect providers.
 
 ### [Get-AzApiManagementOpenIdConnectProviderClientSecret](Get-AzApiManagementOpenIdConnectProviderClientSecret.md)
-Gets client secret of the OpenID Connect provider.
+Gets OpenID Connect provider client secret.
 
 ### [Get-AzApiManagementOperation](Get-AzApiManagementOperation.md)
 Gets a list or a specified API Operation.
@@ -195,7 +195,7 @@ Creates a new Identity Provider configuration.
 Creates an API Management Logger.
 
 ### [New-AzApiManagementNamedValue](New-AzApiManagementNamedValue.md)
-Creates an API Management Named Value.
+Creates new Named Value.
 
 ### [New-AzApiManagementOpenIdConnectProvider](New-AzApiManagementOpenIdConnectProvider.md)
 Creates an OpenID Connect provider.
