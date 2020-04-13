@@ -17,9 +17,9 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
     using Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models;
     using System.Management.Automation;
 
-    [Cmdlet("Get", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "ApiManagementTenantGitAccessSecrets")]
+    [Cmdlet("Get", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "ApiManagementTenantAccessSecret")]
     [OutputType(typeof(PsApiManagementAccessInformation))]
-    public class GetAzureRmApiManagementTenantGitAccessSecrets : AzureApiManagementCmdletBase
+    public class GetAzureRmApiManagementTenantAccessSecret : AzureApiManagementCmdletBase
     {
         [Parameter(
             ValueFromPipelineByPropertyName = true,
@@ -31,7 +31,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 
         public override void ExecuteApiManagementCmdlet()
         {
-            WriteObject(Client.GetTenantGitAccessInformationSecrets(Context));
+            WriteObject(Client.GetTenantAccessInformationSecrets(Context));
         }
     }
 }

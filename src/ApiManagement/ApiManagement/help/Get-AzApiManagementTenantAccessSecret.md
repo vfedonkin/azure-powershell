@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-AzApiManagementTenantAccessSecrets
+# Get-AzApiManagementTenantAccessSecret
 
 ## SYNOPSIS
 Gets the access configuration keys for a tenant.
@@ -13,7 +13,7 @@ Gets the access configuration keys for a tenant.
 ## SYNTAX
 
 ```
-Get-AzApiManagementTenantAccessSecrets -Context <PsApiManagementContext>
+Get-AzApiManagementTenantAccessSecret -Context <PsApiManagementContext>
  [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
@@ -25,7 +25,7 @@ Gets the access configuration keys for a tenant.
 ### Example 1: Get tenant access configuration keys
 ```
 PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzApiManagementTenantAccessSecrets -Context $apimContext
+PS C:\>Get-AzApiManagementTenantAccessSecret -Context $apimContext
 ```
 
 This command gets the tenant access configuration keys for the specified context.

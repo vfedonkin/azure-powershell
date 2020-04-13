@@ -107,19 +107,19 @@ Gets a link with an SSO token to a deployed management portal of an API Manageme
 ### [Get-AzApiManagementSubscription](Get-AzApiManagementSubscription.md)
 Gets subscriptions.
 
-### [Get-AzApiManagementSubscriptionKeys](Get-AzApiManagementSubscriptionKeys.md)
+### [Get-AzApiManagementSubscriptionKey](Get-AzApiManagementSubscriptionKey.md)
 Gets subscription keys.
 
 ### [Get-AzApiManagementTenantAccess](Get-AzApiManagementTenantAccess.md)
 Gets the access configuration for a tenant.
 
-### [Get-AzApiManagementTenantAccessSecrets](Get-AzApiManagementTenantAccessSecrets.md)
+### [Get-AzApiManagementTenantAccessSecret](Get-AzApiManagementTenantAccessSecret.md)
 Gets the access configuration keys for a tenant.
 
 ### [Get-AzApiManagementTenantGitAccess](Get-AzApiManagementTenantGitAccess.md)
 Gets the Git access configuration for a tenant.
 
-### [Get-AzApiManagementTenantGitAccessSecrets](Get-AzApiManagementTenantGitAccessSecrets.md)
+### [Get-AzApiManagementTenantGitAccessSecret](Get-AzApiManagementTenantGitAccessSecret.md)
 Gets the Git access configuration keys for a tenant.
 
 ### [Get-AzApiManagementTenantSyncState](Get-AzApiManagementTenantSyncState.md)

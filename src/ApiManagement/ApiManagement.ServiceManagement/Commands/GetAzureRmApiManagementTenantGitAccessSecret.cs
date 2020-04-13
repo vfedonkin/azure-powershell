@@ -15,15 +15,12 @@
 namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
 {
     using Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models;
-    using System;
     using System.Management.Automation;
 
-    [Cmdlet("Get", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "ApiManagementSubscriptionKeys", DefaultParameterSetName = GetBySubscriptionId)]
-    [OutputType(typeof(PsApiManagementSubscriptionKeys), ParameterSetName = new[] { GetBySubscriptionId })]
-    public class GetAzureApiManagementSubscriptionKeys : AzureApiManagementCmdletBase
+    [Cmdlet("Get", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "ApiManagementTenantGitAccessSecret")]
+    [OutputType(typeof(PsApiManagementAccessInformation))]
+    public class GetAzureRmApiManagementTenantGitAccessSecret : AzureApiManagementCmdletBase
     {
-        private const string GetBySubscriptionId = "GetBySubscriptionId";
-
         [Parameter(
             ValueFromPipelineByPropertyName = true,
             ValueFromPipeline = true,
@@ -32,28 +29,9 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
         [ValidateNotNullOrEmpty]
         public PsApiManagementContext Context { get; set; }
 
-        [Parameter(
-            ParameterSetName = GetBySubscriptionId,
-            ValueFromPipelineByPropertyName = true,
-            Mandatory = true,
-            HelpMessage = "Subscription identifier. This parameter is required.")]
-        public String SubscriptionId { get; set; }
-
-
         public override void ExecuteApiManagementCmdlet()
         {
-            if (ParameterSetName.Equals(GetBySubscriptionId))
-            {
-                var subscription = Client.SubscriptionKeysById(
-                    Context.ResourceGroupName, 
-                    Context.ServiceName,
-                    SubscriptionId);
-                WriteObject(subscription);
-            }
-            else
-            {
-                throw new InvalidOperationException(string.Format("Parameter set name '{0}' is not supported.", ParameterSetName));
-            }
+            WriteObject(Client.GetTenantGitAccessInformationSecrets(Context));
         }
     }
 }

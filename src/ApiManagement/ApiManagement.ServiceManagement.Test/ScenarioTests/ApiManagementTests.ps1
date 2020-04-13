@@ -1198,7 +1198,7 @@ function SubscriptionOldModel-CrudTest {
         Assert-Null $subs[$i].PrimaryKey $sub.PrimaryKey
         Assert-Null $subs[$i].SecondaryKey $sub.SecondaryKey
 
-        $sub = Get-AzApiManagementSubscriptionKeys -Context $context -SubscriptionId $subs[$i].SubscriptionId
+        $sub = Get-AzApiManagementSubscriptionKey -Context $context -SubscriptionId $subs[$i].SubscriptionId
         Assert-NotNull $sub.PrimaryKey
         Assert-NotNull $sub.SecondaryKey
     }
@@ -1240,7 +1240,7 @@ function SubscriptionOldModel-CrudTest {
         Assert-AreEqual $newSubscriptionState $sub.State
         Assert-AreEqual $patchedExpirationDate $sub.ExpirationDate
 
-        $subKeys = Get-AzApiManagementSubscriptionKeys -Context $context -SubscriptionId $newSubscriptionId
+        $subKeys = Get-AzApiManagementSubscriptionKey -Context $context -SubscriptionId $newSubscriptionId
         Assert-AreEqual $patchedPk $subKeys.PrimaryKey
         Assert-AreEqual $patchedSk $subKeys.SecondaryKey
 
@@ -1368,7 +1368,7 @@ function SubscriptionNewModel-CrudTest {
         Assert-Null $sub.OwnerId
 
         # get keys
-        $subKeys = Get-AzApiManagementSubscriptionKeys -Context $context -SubscriptionId $newSubscriptionId
+        $subKeys = Get-AzApiManagementSubscriptionKey -Context $context -SubscriptionId $newSubscriptionId
         Assert-AreEqual $newSubscriptionPk $subKeys.PrimaryKey
         Assert-AreEqual $newSubscriptionSk $subKeys.SecondaryKey
 
@@ -1392,7 +1392,7 @@ function SubscriptionNewModel-CrudTest {
         Assert-NotNull $sub.OwnerId
 
         # get keys
-        $subKeys = Get-AzApiManagementSubscriptionKeys -Context $context -SubscriptionId $newSubscriptionId
+        $subKeys = Get-AzApiManagementSubscriptionKey -Context $context -SubscriptionId $newSubscriptionId
         Assert-AreEqual $patchedPk $subKeys.PrimaryKey
         Assert-AreEqual $patchedSk $subKeys.SecondaryKey
 

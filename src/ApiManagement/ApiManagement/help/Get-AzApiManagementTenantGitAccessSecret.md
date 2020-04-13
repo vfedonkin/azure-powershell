@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-AzApiManagementTenantGitAccessSecrets
+# Get-AzApiManagementTenantGitAccessSecret
 
 ## SYNOPSIS
 Gets the Git access configuration keys for a tenant.
@@ -13,7 +13,7 @@ Gets the Git access configuration keys for a tenant.
 ## SYNTAX
 
 ```
-Get-AzApiManagementTenantGitAccessSecrets -Context <PsApiManagementContext>
+Get-AzApiManagementTenantGitAccessSecret -Context <PsApiManagementContext>
  [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
@@ -25,7 +25,7 @@ Gets the Git access configuration keys for a tenant.
 ### Example 1: Get tenant access configuration
 ```powershell
 PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzApiManagementTenantGitAccessSecrets -Context $apimContext
+PS C:\>Get-AzApiManagementTenantGitAccessSecret -Context $apimContext
 ```
 
 ```

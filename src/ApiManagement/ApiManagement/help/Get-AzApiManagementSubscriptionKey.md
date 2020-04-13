@@ -6,7 +6,7 @@ online version: https://docs.microsoft.com/en-us/powershell/module/az.apimanagem
 schema: 2.0.0
 ---
 
-# Get-AzApiManagementSubscriptionKeys
+# Get-AzApiManagementSubscriptionKey
 
 ## SYNOPSIS
 Gets subscription keys.
@@ -14,19 +14,19 @@ Gets subscription keys.
 ## SYNTAX
 
 ```
-Get-AzApiManagementSubscriptionKeys -Context <PsApiManagementContext> -SubscriptionId <String>
+Get-AzApiManagementSubscriptionKey -Context <PsApiManagementContext> -SubscriptionId <String>
  [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The **Get-AzApiManagementSubscriptionKeys** cmdlet gets a keys of a specified subscription.
+The **Get-AzApiManagementSubscriptionKey** cmdlet gets a keys of a specified subscription.
 
 ## EXAMPLES
 
 ### Example 1: Get a subscription keys with a specified ID
 ```
 PS C:\>$apimContext = New-AzApiManagementContext -ResourceGroupName "Api-Default-East-US" -ServiceName "contoso"
-PS C:\>Get-AzApiManagementSubscriptionKeys -Context $apimContext -SubscriptionId "0123456789"
+PS C:\>Get-AzApiManagementSubscriptionKey -Context $apimContext -SubscriptionId "0123456789"
 
 PrimaryKey        : 5e48532634114fe999a6979ce0d63a64
 SecondaryKey      : 0a8efaf85a664aa0a412241015c7c8f6
@@ -93,7 +93,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementSubscriptionKeys
+### Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementSubscriptionKey
 
 ## NOTES
 

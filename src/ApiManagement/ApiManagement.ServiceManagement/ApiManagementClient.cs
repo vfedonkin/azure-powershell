@@ -320,7 +320,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
                     .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.DisplayName));
 
                 cfg
-                    .CreateMap<SubscriptionKeysContract, PsApiManagementSubscriptionKeys>()
+                    .CreateMap<SubscriptionKeysContract, PsApiManagementSubscriptionKey>()
                     .ForMember(dest => dest.PrimaryKey, opt => opt.MapFrom(src => src.PrimaryKey))
                     .ForMember(dest => dest.SecondaryKey, opt => opt.MapFrom(src => src.SecondaryKey));
 
@@ -1850,7 +1850,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
             return subscription;
         }
 
-        public PsApiManagementSubscriptionKeys SubscriptionKeysById(
+        public PsApiManagementSubscriptionKey SubscriptionKeyById(
             string resourceGroupName,
             string serviceName,
             string subscriptionId)
@@ -1859,7 +1859,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement
                 resourceGroupName,
                 serviceName,
                 subscriptionId);
-            var keys = Mapper.Map<PsApiManagementSubscriptionKeys>(response);
+            var keys = Mapper.Map<PsApiManagementSubscriptionKey>(response);
 
             return keys;
         }
