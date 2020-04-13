@@ -137,7 +137,8 @@ namespace Microsoft.Azure.Commands.ApiManagement
             PsApiManagementCustomHostNameConfiguration[] customHostnameConfigurations = null,
             PsApiManagementSystemCertificate[] systemCertificates = null,
             PsApiManagementSslSetting sslSettings = null,
-            bool createResourceIdentity = false)
+            bool createSystemResourceIdentity = false,
+            string[] userAssignedIdentities = null)
         {
             string skuType = Mappers.MapSku(sku);
 
@@ -214,10 +215,7 @@ namespace Microsoft.Azure.Commands.ApiManagement
                 parameters.EnableClientCertificate = enableClientCertificate;
             }
 
-            if (createResourceIdentity)
-            {
-                parameters.Identity = new ApiManagementServiceIdentity() { Type = "SystemAssigned" };
-            }
+            parameters.Identity = Mappers.MapAssignedIdentities(createSystemResourceIdentity, userAssignedIdentities);
 
             var apiManagementResource = Client.ApiManagementService.CreateOrUpdate(resourceGroupName, serviceName, parameters);
             return new PsApiManagement(apiManagementResource);      
@@ -291,14 +289,12 @@ namespace Microsoft.Azure.Commands.ApiManagement
 
         public PsApiManagement SetApiManagementService(
             PsApiManagement apiManagement,
-            bool createSystemResourceIdentity)
+            bool createSystemResourceIdentity,
+            string[] userAssignedIdentities)
         {
             ApiManagementServiceResource apiManagementParameters = Mappers.MapPsApiManagement(apiManagement);
 
-            if (createSystemResourceIdentity)
-            {
-                apiManagementParameters.Identity = new ApiManagementServiceIdentity() { Type = "SystemAssigned" };
-            }
+            apiManagementParameters.Identity = Mappers.MapAssignedIdentities(createSystemResourceIdentity, userAssignedIdentities);
 
             var apiManagementService = Client.ApiManagementService.CreateOrUpdate(
                 apiManagement.ResourceGroupName, 
