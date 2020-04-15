@@ -36,7 +36,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.Commands
             ValueFromPipelineByPropertyName = true,
             Mandatory = false,
             HelpMessage = "Assign User Identities to this server for use with key management services like Azure KeyVault.")]
-        public string[] UserAssignedIdentities { get; set; }
+        public string[] UserAssignedIdentity { get; set; }
 
         [Parameter(Mandatory = false, HelpMessage = "Run cmdlet in the background")]
         public SwitchParameter AsJob { get; set; }
@@ -52,7 +52,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.Commands
                 var apiManagementResource = Client.SetApiManagementService(
                     InputObject, 
                     SystemAssignedIdentity.IsPresent,
-                    UserAssignedIdentities);
+                    UserAssignedIdentity);
 
                 if (PassThru.IsPresent)
                 {

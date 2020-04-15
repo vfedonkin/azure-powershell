@@ -86,15 +86,15 @@ namespace Microsoft.Azure.Commands.ApiManagement.Helpers
             }
         }
 
-        public static ApiManagementServiceIdentity MapAssignedIdentities(bool createSystemResourceIdentity, string[] userAssignedIdentities)
+        public static ApiManagementServiceIdentity MapAssignedIdentity(bool createSystemResourceIdentity, string[] userAssignedIdentity)
         {
             ApiManagementServiceIdentity identity = null;
 
-            if (createSystemResourceIdentity || userAssignedIdentities != null)
+            if (createSystemResourceIdentity || userAssignedIdentity != null)
             {
                 identity = new ApiManagementServiceIdentity();
 
-                if (createSystemResourceIdentity && userAssignedIdentities != null)
+                if (createSystemResourceIdentity && userAssignedIdentity != null)
                 {
                     identity.Type = PsApiManagementServiceIdentityTypes.SystemAndUserAssigned;
                 }
@@ -107,9 +107,9 @@ namespace Microsoft.Azure.Commands.ApiManagement.Helpers
                     identity.Type = PsApiManagementServiceIdentityTypes.UserAssigned;
                 }
 
-                if (userAssignedIdentities != null)
+                if (userAssignedIdentity != null)
                 {
-                    identity.UserAssignedIdentities = userAssignedIdentities.ToDictionary(i => i, i => new UserIdentityProperties());
+                    identity.UserAssignedIdentities = userAssignedIdentity.ToDictionary(i => i, i => new UserIdentityProperties());
                 }
             }
             return identity;
@@ -128,9 +128,9 @@ namespace Microsoft.Azure.Commands.ApiManagement.Helpers
             }
 
             bool systemAssigned = identity.Type == PsApiManagementServiceIdentityTypes.SystemAssigned || identity.Type == PsApiManagementServiceIdentityTypes.SystemAndUserAssigned;
-            string[] userIdentities = identity.UserAssignedIdentities?.Keys.ToArray();
+            string[] userIdentities = identity.UserAssignedIdentity?.Keys.ToArray();
 
-            return MapAssignedIdentities(systemAssigned , userIdentities);
+            return MapAssignedIdentity(systemAssigned , userIdentities);
         }
         
         public static ApiManagementServiceResource MapPsApiManagement(PsApiManagement apiManagement)

@@ -138,7 +138,7 @@ namespace Microsoft.Azure.Commands.ApiManagement
             PsApiManagementSystemCertificate[] systemCertificates = null,
             PsApiManagementSslSetting sslSettings = null,
             bool createSystemResourceIdentity = false,
-            string[] userAssignedIdentities = null)
+            string[] userAssignedIdentity = null)
         {
             string skuType = Mappers.MapSku(sku);
 
@@ -215,7 +215,7 @@ namespace Microsoft.Azure.Commands.ApiManagement
                 parameters.EnableClientCertificate = enableClientCertificate;
             }
 
-            parameters.Identity = Mappers.MapAssignedIdentities(createSystemResourceIdentity, userAssignedIdentities);
+            parameters.Identity = Mappers.MapAssignedIdentity(createSystemResourceIdentity, userAssignedIdentity);
 
             var apiManagementResource = Client.ApiManagementService.CreateOrUpdate(resourceGroupName, serviceName, parameters);
             return new PsApiManagement(apiManagementResource);      
@@ -290,11 +290,11 @@ namespace Microsoft.Azure.Commands.ApiManagement
         public PsApiManagement SetApiManagementService(
             PsApiManagement apiManagement,
             bool createSystemResourceIdentity,
-            string[] userAssignedIdentities)
+            string[] userAssignedIdentity)
         {
             ApiManagementServiceResource apiManagementParameters = Mappers.MapPsApiManagement(apiManagement);
 
-            apiManagementParameters.Identity = Mappers.MapAssignedIdentities(createSystemResourceIdentity, userAssignedIdentities);
+            apiManagementParameters.Identity = Mappers.MapAssignedIdentity(createSystemResourceIdentity, userAssignedIdentity);
 
             var apiManagementService = Client.ApiManagementService.CreateOrUpdate(
                 apiManagement.ResourceGroupName, 

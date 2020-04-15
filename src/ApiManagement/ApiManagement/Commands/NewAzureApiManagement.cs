@@ -125,7 +125,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.Commands
             ValueFromPipelineByPropertyName = true,
             Mandatory = false,
             HelpMessage = "Assign User Identities to this server for use with key management services like Azure KeyVault.")]
-        public string[] UserAssignedIdentities { get; set; }
+        public string[] UserAssignedIdentity { get; set; }
 
         [Parameter(Mandatory = false,
             HelpMessage = "Flag only meant to be used for Consumption SKU ApiManagement Service. " +
@@ -152,7 +152,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.Commands
                     SystemCertificateConfiguration,
                     SslSetting,
                     SystemAssignedIdentity.IsPresent,
-                    UserAssignedIdentities);
+                    UserAssignedIdentity);
 
             this.WriteObject(apiManagementService);
         }

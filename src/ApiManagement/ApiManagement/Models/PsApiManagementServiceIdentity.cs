@@ -53,7 +53,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.Models
 
             if(serviceIdentity.UserAssignedIdentities != null)
             {
-                UserAssignedIdentities = serviceIdentity.UserAssignedIdentities.ToDictionary(i => i.Key, i => new PsApiManagementUserAssignedInformation(i.Value));
+                UserAssignedIdentity = serviceIdentity.UserAssignedIdentities.ToDictionary(i => i.Key, i => new PsApiManagementUserAssignedInformation(i.Value));
             }
         }
 
@@ -63,7 +63,7 @@ namespace Microsoft.Azure.Commands.ApiManagement.Models
 
         public string Type { get; set; }
 
-        public IDictionary<string, PsApiManagementUserAssignedInformation> UserAssignedIdentities { get; set; }
+        public IDictionary<string, PsApiManagementUserAssignedInformation> UserAssignedIdentity { get; set; }
     }
 
     public class PsApiManagementUserAssignedInformation

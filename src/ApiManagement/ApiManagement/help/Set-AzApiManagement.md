@@ -14,7 +14,7 @@ Updates an Azure Api Management service
 
 ```
 Set-AzApiManagement -InputObject <PsApiManagement> [-SystemAssignedIdentity]
- [-UserAssignedIdentities <String[]>] [-AsJob] [-PassThru] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
+ [-UserAssignedIdentity <String[]>] [-AsJob] [-PassThru] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
@@ -144,7 +144,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserAssignedIdentities
+### -UserAssignedIdentity
 Assign User Identities to this server for use with key management services like Azure KeyVault.
 
 ```yaml

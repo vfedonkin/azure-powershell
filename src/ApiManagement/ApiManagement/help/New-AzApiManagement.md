@@ -21,7 +21,7 @@ New-AzApiManagement -ResourceGroupName <String> -Name <String> -Location <String
  [-AdditionalRegions <PsApiManagementRegion[]>]
  [-CustomHostnameConfiguration <PsApiManagementCustomHostNameConfiguration[]>]
  [-SystemCertificateConfiguration <PsApiManagementSystemCertificate[]>]
- [-SslSetting <PsApiManagementSslSetting>] [-SystemAssignedIdentity] [-UserAssignedIdentities <String[]>]
+ [-SslSetting <PsApiManagementSslSetting>] [-SystemAssignedIdentity] [-UserAssignedIdentity <String[]>]
  [-EnableClientCertificate] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
@@ -403,7 +403,7 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -UserAssignedIdentities
+### -UserAssignedIdentity
 Assign User Identities to this server for use with key management services like Azure KeyVault.
 
 ```yaml

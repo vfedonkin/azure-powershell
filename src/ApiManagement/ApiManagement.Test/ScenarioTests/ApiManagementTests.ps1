@@ -458,7 +458,7 @@ function Test-ApiManagementWithAdditionalRegionsCRUD {
         $userIdentities = @($userIdentity)
 
         # Create API Management service
-        $result = New-AzApiManagement -ResourceGroupName $resourceGroupName -Location $location -Name $apiManagementName -Organization $organization -AdminEmail $adminEmail -Sku $sku -Capacity $capacity -AdditionalRegions $regions -UserAssignedIdentities $userIdentities 
+        $result = New-AzApiManagement -ResourceGroupName $resourceGroupName -Location $location -Name $apiManagementName -Organization $organization -AdminEmail $adminEmail -Sku $sku -Capacity $capacity -AdditionalRegions $regions -UserAssignedIdentity $userIdentities 
 
         Assert-AreEqual $resourceGroupName $result.ResourceGroupName
         Assert-AreEqual $apiManagementName $result.Name
@@ -488,11 +488,11 @@ function Test-ApiManagementWithAdditionalRegionsCRUD {
         Assert-AreEqual "UserAssigned" $result.Identity.Type;
  #       Assert-Null $result.Identity.PrincipalId;
  #       Assert-Null $result.Identity.TenantId;
-        Assert-NotNull $result.Identity.UserAssignedIdentities;
-        foreach ($key in $result.Identity.UserAssignedIdentities.Keys) { 
+        Assert-NotNull $result.Identity.UserAssignedIdentity;
+        foreach ($key in $result.Identity.UserAssignedIdentity.Keys) { 
             Assert-AreEqual $userIdentity $key;
-            Assert-NotNull $result.Identity.UserAssignedIdentities[$key].PrincipalId
-            Assert-NotNull $result.Identity.UserAssignedIdentities[$key].ClientId
+            Assert-NotNull $result.Identity.UserAssignedIdentity[$key].PrincipalId
+            Assert-NotNull $result.Identity.UserAssignedIdentity[$key].ClientId
         } 
 
         #remove the first additional region and scale up second additional region
@@ -526,12 +526,12 @@ function Test-ApiManagementWithAdditionalRegionsCRUD {
         Assert-AreEqual "SystemAssigned, UserAssigned" $updatedService.Identity.Type;
         Assert-NotNull $updatedService.Identity.PrincipalId;
         Assert-NotNull $updatedService.Identity.TenantId;
-        Assert-NotNull $updatedService.Identity.UserAssignedIdentities;
-        foreach ($key in $updatedService.Identity.UserAssignedIdentities.Keys) 
+        Assert-NotNull $updatedService.Identity.UserAssignedIdentity;
+        foreach ($key in $updatedService.Identity.UserAssignedIdentity.Keys) 
         { 
             Assert-AreEqual $userIdentity $key;
-            Assert-NotNull $updatedService.Identity.UserAssignedIdentities[$key].PrincipalId
-            Assert-NotNull $updatedService.Identity.UserAssignedIdentities[$key].ClientId
+            Assert-NotNull $updatedService.Identity.UserAssignedIdentity[$key].PrincipalId
+            Assert-NotNull $updatedService.Identity.UserAssignedIdentity[$key].ClientId
         }
 
     }
